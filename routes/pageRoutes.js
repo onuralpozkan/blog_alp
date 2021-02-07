@@ -1,0 +1,15 @@
+const express = require('express')
+const router = express.Router()
+const pageControllers = require('../controllers/pageControllers')
+const authMW =require('../middlewares/authMW')
+const redirectAuthedMW = require('../middlewares/redirectIfAuthedMW')
+const authControllers = require('../controllers/authController')
+router.get('/', pageControllers.homePage)
+router.get('/create', authMW, pageControllers.createPage)
+router.get('/about', pageControllers.aboutPage)
+router.get('/auth/login', redirectAuthedMW, pageControllers.loginPage)
+router.get('/auth/register', redirectAuthedMW, pageControllers.registerPage)
+router.get('/auth/logout', authControllers.logoutUser)
+router.get('/post/:id', pageControllers.postPage)
+
+module.exports = router

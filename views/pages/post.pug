@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    header(class="masthead", style= `background-image: url(${blogpost.imgUrl})`)
+        .overlay
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    .post-heading
+                        h1= blogpost.title
+                        h2(class="subheading")= blogpost.description
+                        span.meta Posted by 
+                            a(href="#")= blogpost.userid.username
+                            br
+                            |  on #{blogpost.createDate.toDateString()}
+    article
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    #{blogpost.message}
+    include ../includes/footer
+    include ../includes/scripts
+    

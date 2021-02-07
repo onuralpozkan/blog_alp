@@ -1,0 +1,30 @@
+nav(class="navbar navbar-expand-lg navbar-light fixed-top",id="mainNav")
+    .container
+        if user_name
+            span
+            if photoUrl
+                img(src=photoUrl, alt="User",width="48px",height="48px",class="rounded-circle")
+                a(class="navbar-brand", href="/")= "Hoşgeldin " + user_name.toUpperCase()
+            else
+                img(src="/assets/img/user.png", alt="User Avatar",width="48px",height="48px",class="rounded-circle") 
+        else
+            a(class="navbar-brand", href="/") Alp's Blog
+        button(class="navbar-toggler navbar-toggler-right",type="button",data-toggle="collapse",data-target="#navbarResponsive",aria-controls="navbarResponsive",aria-expanded="false",aria-label="Toggle navigation") Menu
+            i(class="fas fa-bars")
+        div(class="collapse navbar-collapse", id="navbarResponsive")
+            ul(class="navbar-nav ml-auto")
+                li(class="nav-item")
+                    a(class="nav-link", href="/") Home
+                li(class="nav-item")
+                    a(class="nav-link", href="/about") About
+                if loggedIn
+                    li(class="nav-item")
+                        a(class="nav-link", href="/create") New Post
+                    li(class="nav-item")
+                        a(class="nav-link btn btn-danger", href="/auth/logout") Logout
+                else
+                    li(class="nav-item")
+                        a(class="nav-link", href="/auth/register") Register
+                    li(class="nav-item")
+                        a(class="nav-link btn btn-primary", href="/auth/login") Login
+                

@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+        include ../includes/header
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    p Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!
+                    form(action="/posts/store",method="POST",enctype="multipart/form-data")
+                        .control-group
+                            .form-group.floating-label-form-group.controls
+                                label Blog Title
+                                input(type="text",class="form-control",placeholder="Title",id="title", name="title")
+                        .control-group
+                            .form-group.floating-label-form-group.controls
+                                label Description
+                                input(type="text",class="form-control",placeholder="Description",id="description", name="description")
+                        .control-group
+                            .form-group.floating-label-form-group.controls
+                                label Blog Message
+                                textarea(id="summernote",name="message")
+                        .control-group
+                            .form-group.floating-label-form-group.controls
+                                label Add Background
+                                input(type="file",class="form-control",id="image", name="image")
+                        br
+                        button(type="submit",class="btn btn-primary", id="sendMessageButton") Submit
+                        hr
+                        script.
+                            $('#summernote').summernote({
+                                placeholder:"To Write a new Blog",
+                                tabsize:2,
+                                height:200,
+                                toolbar: [
+                                    ['style', ['style']],
+                                    ['font', ['bold', 'underline', 'clear']],
+                                    ['color', ['color']],
+                                    ['para', ['ul', 'ol', 'paragraph']],
+                                    ['table', ['table']],
+                                    ['insert', ['link', 'picture', 'video']],
+                                    ['view', ['fullscreen', 'codeview', 'help']]
+                                ]
+                            })
+        include ../includes/scripts
