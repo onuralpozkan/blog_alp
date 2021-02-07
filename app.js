@@ -1,5 +1,8 @@
 const express = require('express')
-const port = process.env.PORT || 3000
+let port = process.env.PORT;
+if (port == null || port == "") {
+port = 4000;
+}
 const mongoose = require('mongoose')
 const pug = require('pug')
 const bodyParser = require('body-parser')
@@ -7,12 +10,13 @@ const fileUpload = require('express-fileupload')
 const expressSession = require('express-session')
 const flash = require('connect-flash')
 const app = express()
+require('dotenv').config()
 
 app.use(express.static('public'))
 app.use(fileUpload())
 app.use(flash())
 app.use(expressSession({
-    secret: "Secret Kes",
+    secret: process.env.SECRET_KEY,
     resave:false,
     saveUninitialized:true    
 }))
@@ -40,7 +44,7 @@ app.use(postRoutes)
 // Not Found Page
 app.use('*', (req,res) => res.render('notfound',{title:"404 - Not Found",subtitle:"",bg_img:'/assets/img/notfound-bg.jpg'}))
 //Connection To DB
-const url = "mongodb+srv://onuralp-01:LVK4CXZbu58xqKK@alpcluster.nmckt.mongodb.net/blogsitesi"
+const url = process.env.MONGO_URL
 mongoose.connect(url, {useUnifiedTopology:true,useCreateIndex:true,useNewUrlParser:true})
 
 app.listen(port, () => console.log(`Server Started At ${port}`))
